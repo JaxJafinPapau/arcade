@@ -80,14 +80,13 @@ router.put("/:id", function(req, res, next) {
 
 router.delete("/:id", function(req, res, next) {
   Game.destroy({
-    returning: true,
     where: {
-      id: parseInt(req.params.id)
+      id: req.params.id
     }
   })
   .then(deleted_game => {
     res.setHeader("Content-Type", "application/json");
-    res.status(200).send(JSON.stringify(deleted_game));
+    res.status(204);
   })
   .catch(error => {
     res.setHeader("Content-Type", "application/json");
